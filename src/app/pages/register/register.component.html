@@ -1,0 +1,51 @@
+<div class="auth-container">
+  <div class="auth-header">
+    <h2>💰 Money Lending</h2>
+    <p class="subtitle">Create your account to get started</p>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>👤 Full Name</label>
+      <input
+        formControlName="name"
+        placeholder="Enter your full name"
+        type="text"
+      />
+    </div>
+    <div>
+      <label>📧 Email</label>
+      <input
+        formControlName="email"
+        placeholder="Enter your email"
+        type="email"
+      />
+    </div>
+    <div>
+      <label>🔒 Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Min 6 characters"
+        autocomplete="new-password"
+      />
+    </div>
+    <div>
+      <label>📱 Phone Number <span class="optional">(Optional)</span></label>
+      <input
+        type="tel"
+        formControlName="phone"
+        placeholder="Your phone number"
+      />
+    </div>
+    <div>
+      <label>💳 UPI ID <span class="optional">(Optional)</span></label>
+      <input type="text" formControlName="upiId" placeholder="yourname@paytm" />
+      <small>Add your UPI ID to generate payment QR code</small>
+    </div>
+    <button type="submit" [disabled]="form.invalid">🚀 Create Account</button>
+  </form>
+  <div *ngIf="error" class="error-message">⚠️ {{ error }}</div>
+  <p class="auth-link">
+    Already have an account? <a routerLink="/login">Login here</a>
+  </p>
+</div>

@@ -1,0 +1,9 @@
+<nav class="nav">
+  <a routerLink="/add" routerLinkActive="active">➕ Add Transaction</a>
+  <a routerLink="/transactions" routerLinkActive="active">📋 My Transactions</a>
+  <a routerLink="/summary" routerLinkActive="active">📊 Summary</a>
+  <a routerLink="/lender-dashboard" routerLinkActive="active">💰 Lender</a>
+  <a routerLink="/borrower-dashboard" routerLinkActive="active">🤝 Borrower</a>
+  <a routerLink="/profile" routerLinkActive="active">👤 Profile</a>
+  <button *ngIf="auth.isLoggedIn()" (click)="logout()">🚪 Logout</button>
+</nav>

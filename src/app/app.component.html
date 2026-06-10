@@ -1,0 +1,4 @@
+<app-nav *ngIf="auth.isLoggedIn() && !isAuthPage()"></app-nav>
+<div class="container" [class.auth-container]="isAuthPage()">
+  <router-outlet></router-outlet>
+</div>

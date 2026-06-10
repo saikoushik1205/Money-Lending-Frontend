@@ -1,0 +1,11 @@
+<h2>Friends Summary</h2>
+<div *ngIf="loading" class="loading">Loading summary...</div>
+<div *ngIf="!loading && friends.length === 0" class="empty-state">
+  <p>No friends data available.</p>
+</div>
+<div *ngFor="let f of friends" class="card">
+  <div class="summary-row">
+    <strong class="friend-name">{{ f.friendName }}</strong>
+    <span class="total-amount">₹{{ f.totalAmount }}</span>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<h2>Your Transactions</h2>
+<div *ngIf="loading" class="loading">Loading transactions...</div>
+<div *ngIf="!loading && transactions.length === 0" class="empty-state">
+  <p>
+    No transactions yet. <a routerLink="/add">Add your first transaction</a>
+  </p>
+</div>
+<div *ngFor="let t of transactions" class="card">
+  <div class="transaction-header">
+    <strong>{{ t.friendName }}</strong>
+    <span class="amount">₹{{ t.amount }}</span>
+  </div>
+  <div class="transaction-date">{{ t.date | date : "medium" }}</div>
+  <div *ngIf="t.note" class="transaction-note">{{ t.note }}</div>
+  <div class="button-group">
+    <button (click)="edit(t)" class="edit-btn">Edit</button>
+    <button (click)="del(t._id)" class="delete-btn">Delete</button>
+  </div>
+</div>

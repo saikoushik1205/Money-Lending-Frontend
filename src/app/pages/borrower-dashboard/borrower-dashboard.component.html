@@ -1,0 +1,101 @@
+<h2>Borrower Dashboard</h2>
+
+<div class="dashboard-section">
+  <div class="action-buttons">
+    <a routerLink="/borrow-request" class="action-btn"
+      >Request to Borrow Money</a
+    >
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h3>My Borrow Requests</h3>
+  <div *ngIf="loadingRequests" class="loading">Loading requests...</div>
+  <div
+    *ngIf="!loadingRequests && sentRequests.length === 0"
+    class="empty-state"
+  >
+    <p>
+      No borrow requests sent yet.
+      <a routerLink="/borrow-request">Send a request</a>
+    </p>
+  </div>
+  <div *ngFor="let req of sentRequests" class="card">
+    <div class="request-header">
+      <div>
+        <strong>To: {{ req.lender.name }}</strong>
+        <div class="lender-email">{{ req.lender.email }}</div>
+      </div>
+      <span [class]="getStatusClass(req.status)">{{
+        req.status | uppercase
+      }}</span>
+    </div>
+    <div class="request-amount">Amount: ₹{{ req.amount }}</div>
+    <div class="request-reason">{{ req.reason }}</div>
+    <div class="request-date">
+      Sent: {{ req.createdAt | date : "medium" }}
+      <span *ngIf="req.respondedAt">
+        | Responded: {{ req.respondedAt | date : "medium" }}</span
+      >
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h3>Money I Borrowed</h3>
+  <div *ngIf="loadingBorrowed" class="loading">Loading...</div>
+  <div
+    *ngIf="!loadingBorrowed && borrowedTransactions.length === 0"
+    class="empty-state"
+  >
+    <p>No borrowed money records</p>
+  </div>
+  <div
+    *ngFor="let tx of borrowedTransactions"
+    class="card"
+    [class.repaid-card]="tx.status === 'repaid'"
+  >
+    <div class="transaction-header">
+      <strong>From: {{ tx.friendName }}</strong>
+      <span class="amount-borrowed">₹{{ tx.amount }}</span>
+    </div>
+    <div class="status-badge" [class]="getTransactionStatusClass(tx.status)">
+      {{ getStatusLabel(tx.status) }}
+    </div>
+    <div class="transaction-date">{{ tx.date | date : "medium" }}</div>
+    <div *ngIf="tx.note" class="transaction-note">{{ tx.note }}</div>
+    <div *ngIf="tx.repaymentDate" class="repayment-date">
+      Repaid on: {{ tx.repaymentDate | date : "medium" }}
+    </div>
+    <button
+      *ngIf="tx.status === 'active'"
+      (click)="markAsPaid(tx._id)"
+      class="paid-btn"
+      [disabled]="markingPaid[tx._id]"
+    >
+      {{ markingPaid[tx._id] ? "Processing..." : "Mark as Paid" }}
+    </button>
+    <button
+      *ngIf="tx.status === 'active' && getLenderId(tx)"
+      (click)="showLenderQR(getLenderId(tx))"
+      class="qr-btn"
+      style="margin-top: 8px"
+    >
+      📱 Show Lender's QR to Repay
+    </button>
+    <div *ngIf="tx.status === 'pending_approval'" class="pending-message">
+      ⏳ Waiting for lender approval
+    </div>
+  </div>
+  <div *ngIf="activeBorrowedTransactions.length > 0" class="total-section">
+    <strong>Total Active Borrowed: ₹{{ totalActiveBorrowed }}</strong>
+  </div>
+</div>
+
+<app-qr-modal
+  [isOpen]="showQrModal"
+  [qrCode]="selectedQrCode"
+  [userData]="selectedUser"
+  [title]="'Lender Payment QR Code'"
+  (closed)="closeQrModal()"
+></app-qr-modal>

@@ -1,0 +1,26 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ title }}</h3>
+      <button class="close-btn" (click)="close()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="user-info" *ngIf="userData">
+        <p><strong>Name:</strong> {{ userData.name }}</p>
+        <p *ngIf="userData.phone">
+          <strong>Phone:</strong> {{ userData.phone }}
+        </p>
+        <p *ngIf="userData.upiId">
+          <strong>UPI ID:</strong> {{ userData.upiId }}
+        </p>
+      </div>
+      <div class="qr-container" *ngIf="qrCode">
+        <img [src]="qrCode" alt="Payment QR Code" class="qr-image" />
+        <p class="qr-instruction">Scan this QR code to make payment</p>
+      </div>
+      <div *ngIf="!qrCode" class="no-qr">
+        <p>QR Code not available. User hasn't set up UPI details.</p>
+      </div>
+    </div>
+  </div>
+</div>

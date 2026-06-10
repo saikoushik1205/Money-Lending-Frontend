@@ -1,0 +1,21 @@
+<h2>Add New Transaction</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <input formControlName="friendName" placeholder="Friend name" type="text" />
+  </div>
+  <div>
+    <input
+      formControlName="amount"
+      type="number"
+      placeholder="Amount"
+      step="0.01"
+      min="0.01"
+    />
+  </div>
+  <div><input formControlName="date" type="date" /></div>
+  <div>
+    <input formControlName="note" placeholder="Note (optional)" type="text" />
+  </div>
+  <button type="submit" [disabled]="form.invalid">Add Transaction</button>
+</form>
+<div *ngIf="error" class="error-message">{{ error }}</div>

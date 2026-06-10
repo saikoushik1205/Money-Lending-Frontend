@@ -1,0 +1,84 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <span class="avatar-icon">👤</span>
+    </div>
+    <h2>My Profile</h2>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading profile...</div>
+
+  <div *ngIf="!loading" class="profile-content">
+    <!-- User Info Card -->
+    <div class="profile-card">
+      <h3>📧 Account Information</h3>
+      <div class="info-row">
+        <span class="label">Email:</span>
+        <span class="value">{{ user?.email || "N/A" }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">User ID:</span>
+        <span class="value">{{ user?.userId || "N/A" }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Member Since:</span>
+        <span class="value">{{ user?.createdAt | date : "mediumDate" }}</span>
+      </div>
+    </div>
+
+    <!-- Statistics Card -->
+    <div class="profile-card stats-card">
+      <h3>📊 Your Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">📝</div>
+          <div class="stat-value">{{ stats.totalTransactions }}</div>
+          <div class="stat-label">Total Transactions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">💰</div>
+          <div class="stat-value">₹{{ stats.totalLent }}</div>
+          <div class="stat-label">Total Lent</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">🤝</div>
+          <div class="stat-value">₹{{ stats.totalBorrowed }}</div>
+          <div class="stat-label">Total Borrowed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-value">{{ stats.activeLoans }}</div>
+          <div class="stat-label">Active Loans</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value">{{ stats.completedLoans }}</div>
+          <div class="stat-label">Completed Loans</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions Card -->
+    <div class="profile-card actions-card">
+      <h3>⚡ Quick Actions</h3>
+      <div class="action-buttons">
+        <button class="action-btn" routerLink="/add">
+          <span class="btn-icon">➕</span>
+          Add Transaction
+        </button>
+        <button class="action-btn" routerLink="/transactions">
+          <span class="btn-icon">📋</span>
+          View Transactions
+        </button>
+        <button class="action-btn" routerLink="/summary">
+          <span class="btn-icon">📊</span>
+          View Summary
+        </button>
+        <button class="action-btn logout-btn" (click)="logout()">
+          <span class="btn-icon">🚪</span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<h2>Lender Dashboard</h2>
+
+<div class="dashboard-section">
+  <h3>Repayment Approvals Pending</h3>
+  <div *ngIf="loadingRepayments" class="loading">
+    Loading repayment requests...
+  </div>
+  <div
+    *ngIf="!loadingRepayments && pendingRepayments.length === 0"
+    class="empty-state"
+  >
+    <p>No pending repayment requests</p>
+  </div>
+  <div *ngFor="let rep of pendingRepayments" class="card repayment-card">
+    <div class="request-header">
+      <strong>{{ rep.borrower?.name || "Unknown" }}</strong>
+      <span class="repayment-amount">₹{{ rep.amount }}</span>
+    </div>
+    <div class="request-email">{{ rep.borrower?.email || "No email" }}</div>
+    <div class="repayment-message">
+      💰 Borrower claims to have repaid this amount
+    </div>
+    <div *ngIf="rep.note" class="request-reason">{{ rep.note }}</div>
+    <div class="request-date">
+      Requested: {{ rep.requestDate | date : "medium" }}
+    </div>
+    <div class="button-group">
+      <button (click)="approveRepayment(rep._id)" class="approve-btn">
+        ✓ Approve Repayment
+      </button>
+      <button (click)="rejectRepayment(rep._id)" class="reject-btn">
+        ✗ Reject
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h3>Pending Borrow Requests</h3>
+  <div *ngIf="loadingRequests" class="loading">Loading requests...</div>
+  <div
+    *ngIf="!loadingRequests && pendingRequests.length === 0"
+    class="empty-state"
+  >
+    <p>No pending requests</p>
+  </div>
+  <div *ngFor="let req of pendingRequests" class="card request-card">
+    <div class="request-header">
+      <strong>{{ req.borrower?.name || "Unknown" }}</strong>
+      <span class="amount">₹{{ req.amount }}</span>
+    </div>
+    <div class="request-email">{{ req.borrower?.email || "No email" }}</div>
+    <div class="request-reason">{{ req.reason }}</div>
+    <div class="request-date">
+      Requested: {{ req.createdAt | date : "medium" }}
+    </div>
+    <div class="button-group">
+      <button (click)="acceptRequest(req._id)" class="accept-btn">
+        Accept
+      </button>
+      <button (click)="rejectRequest(req._id)" class="reject-btn">
+        Reject
+      </button>
+      <button
+        (click)="showBorrowerQR(getBorrowerId(req))"
+        class="qr-btn"
+        [disabled]="!getBorrowerId(req)"
+      >
+        📱 View QR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h3>Processed Requests</h3>
+  <div *ngIf="processedRequests.length === 0" class="empty-state">
+    <p>No processed requests yet</p>
+  </div>
+  <div *ngFor="let req of processedRequests" class="card request-card">
+    <div class="request-header">
+      <strong>{{ req.borrower?.name || "Unknown" }}</strong>
+      <span class="amount">₹{{ req.amount }}</span>
+      <span
+        class="status-badge"
+        [class]="
+          req.status === 'accepted' ? 'status-accepted' : 'status-rejected'
+        "
+      >
+        {{ req.status | uppercase }}
+      </span>
+    </div>
+    <div class="request-reason">{{ req.reason }}</div>
+    <div class="request-date">
+      Amount: ₹{{ req.amount }} | Responded:
+      {{ req.respondedAt | date : "short" }}
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h3>Money I Lent</h3>
+  <div *ngIf="loadingLent" class="loading">Loading...</div>
+  <div
+    *ngIf="!loadingLent && activeLentTransactions.length === 0"
+    class="empty-state"
+  >
+    <p>No active lent money records</p>
+  </div>
+  <div
+    *ngFor="let tx of activeLentTransactions"
+    class="card"
+    [class.repaid-card]="tx.status === 'repaid'"
+  >
+    <div class="transaction-header">
+      <strong>{{ tx.friendName }}</strong>
+      <span class="amount">₹{{ tx.amount }}</span>
+    </div>
+    <div class="status-badge" [class]="getTransactionStatusClass(tx.status)">
+      {{ getStatusLabel(tx.status) }}
+    </div>
+    <div class="transaction-date">{{ tx.date | date : "medium" }}</div>
+    <div *ngIf="tx.note" class="transaction-note">{{ tx.note }}</div>
+    <div *ngIf="tx.repaymentDate" class="repayment-date">
+      Repaid on: {{ tx.repaymentDate | date : "medium" }}
+    </div>
+  </div>
+  <div *ngIf="activeLentTransactions.length > 0" class="total-section">
+    <strong>Total Active Lent: ₹{{ totalActiveLent }}</strong>
+  </div>
+</div>
+
+<app-qr-modal
+  [isOpen]="showQrModal"
+  [qrCode]="selectedQrCode"
+  [userData]="selectedUser"
+  [title]="'Borrower Payment QR Code'"
+  (closed)="closeQrModal()"
+></app-qr-modal>

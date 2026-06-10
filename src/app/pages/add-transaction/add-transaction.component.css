@@ -1,0 +1,95 @@
+h2 {
+  text-align: center;
+  color: #667eea;
+  margin-bottom: 32px;
+  font-size: 28px;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form > div {
+  margin-bottom: 20px;
+}
+
+/* 🔥 INPUT — FIXED DOUBLE LAYER */
+input {
+  width: 100%;
+  padding: 14px 16px;
+
+  /* Border handled separately */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  /* CRITICAL FIX */
+  background-color: #fff;
+  background-clip: padding-box;
+
+  font-size: 16px;
+  box-sizing: border-box;
+
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+}
+
+/* Focus — still single layer */
+input:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Chrome number/date inner fixes */
+input[type="number"],
+input[type="date"] {
+  background-clip: padding-box;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Placeholder */
+input::placeholder {
+  color: #999;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #c00;
+  background: #fee;
+  border: 1px solid #fcc;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}

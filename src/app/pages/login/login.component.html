@@ -1,0 +1,30 @@
+<div class="auth-container">
+  <div class="auth-header">
+    <h2>💰 Money Lending</h2>
+    <p class="subtitle">Login to manage your transactions</p>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>📧 Email</label>
+      <input
+        formControlName="email"
+        placeholder="Enter your email"
+        type="email"
+      />
+    </div>
+    <div>
+      <label>🔒 Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+      />
+    </div>
+    <button type="submit" [disabled]="form.invalid">🚀 Login</button>
+  </form>
+  <div *ngIf="error" class="error-message">⚠️ {{ error }}</div>
+  <p class="auth-link">
+    Don't have an account? <a routerLink="/register">Register here</a>
+  </p>
+</div>

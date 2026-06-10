@@ -1,0 +1,12 @@
+.error-message {
+  color: #c00;
+  background: #fee;
+  border: 1px solid #fcc;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+button[type="button"] {
+  margin-left: 10px;
+  background: #95a5a6;
+}

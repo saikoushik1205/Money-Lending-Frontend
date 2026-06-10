@@ -1,0 +1,79 @@
+<h2>Request to Borrow Money</h2>
+
+<div class="search-section">
+  <h3>Search Lender</h3>
+  <input
+    type="text"
+    placeholder="Search by name or email"
+    [formControl]="searchControl"
+    class="search-input"
+  />
+  <div *ngIf="searching" class="loading">Searching...</div>
+  <div class="users-list" *ngIf="users.length > 0">
+    <div
+      *ngFor="let user of users"
+      class="user-card"
+      [class.selected]="selectedUser?._id === user._id"
+      (click)="selectUser(user)"
+    >
+      <strong>{{ user.name }}</strong>
+      <div class="user-email">{{ user.email }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="all-users-section">
+  <h3>All Registered Users</h3>
+  <div *ngIf="loadingAllUsers" class="loading">Loading users...</div>
+  <div class="all-users-list" *ngIf="!loadingAllUsers">
+    <div
+      *ngFor="let user of allUsers"
+      class="user-card-with-status"
+      [class.selected]="selectedUser?._id === user._id"
+      (click)="selectUser(user)"
+    >
+      <div class="user-info">
+        <div
+          class="status-icon"
+          [class.lender]="user.isLender"
+          [class.borrower]="!user.isLender"
+        >
+          {{ user.isLender ? "💰" : "⛔" }}
+        </div>
+        <div class="user-details">
+          <strong>{{ user.name }}</strong>
+          <div class="user-email">{{ user.email }}</div>
+          <div class="user-status">
+            {{ user.isLender ? "Available to Lend" : "Currently Borrowing" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()" *ngIf="selectedUser">
+  <h3>Borrow from: {{ selectedUser.name }}</h3>
+  <div>
+    <input
+      formControlName="amount"
+      type="number"
+      placeholder="Amount"
+      step="0.01"
+      min="0.01"
+    />
+  </div>
+  <div>
+    <textarea
+      formControlName="reason"
+      placeholder="Reason for borrowing"
+      rows="4"
+    ></textarea>
+  </div>
+  <button type="submit" [disabled]="form.invalid || submitting">
+    {{ submitting ? "Sending..." : "Send Request" }}
+  </button>
+</form>
+
+<div *ngIf="error" class="error-message">{{ error }}</div>
+<div *ngIf="success" class="success-message">{{ success }}</div>

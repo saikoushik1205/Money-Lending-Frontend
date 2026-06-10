@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.angular/
+.angular-cache/
+/.cache/
+environment.*
+.env
+frontend/.env
+.DS_Store
+Thumbs.db
+.vscode/
+
+# build outputs
+frontend/dist/
+
+# Local logs
+*.log

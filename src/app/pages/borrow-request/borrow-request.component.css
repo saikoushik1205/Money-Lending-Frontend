@@ -1,0 +1,147 @@
+.search-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+.all-users-section {
+  margin-bottom: 30px;
+}
+.search-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.users-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.all-users-list {
+  max-height: 400px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.user-card {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.user-card:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+.user-card.selected {
+  border-color: #667eea;
+  background: #e8ebff;
+}
+.user-card-with-status {
+  padding: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+.user-card-with-status:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+.user-card-with-status.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #e8ebff 0%, #f8f9ff 100%);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+.user-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.status-icon {
+  font-size: 32px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-icon.lender {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+.status-icon.borrower {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+.user-details {
+  flex: 1;
+  min-width: 0;
+}
+.user-details strong {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 4px;
+}
+.user-email {
+  color: #666;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.user-status {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.user-card-with-status:has(.lender) .user-status {
+  color: #28a745;
+  background: #d4edda;
+}
+.user-card-with-status:has(.borrower) .user-status {
+  color: #dc3545;
+  background: #f8d7da;
+}
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+}
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.error-message {
+  color: #c00;
+  background: #fee;
+  border: 1px solid #fcc;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+.success-message {
+  color: #0a0;
+  background: #efe;
+  border: 1px solid #cfc;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}

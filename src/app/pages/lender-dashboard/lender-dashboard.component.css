@@ -1,0 +1,150 @@
+.dashboard-section {
+  margin-bottom: 40px;
+}
+.request-card {
+  background: #fffef8;
+}
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.request-email {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.request-reason {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-style: italic;
+}
+.request-date {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+.accept-btn {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  flex: 1;
+}
+.reject-btn {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  flex: 1;
+}
+.qr-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  flex: 0.8;
+}
+.status-accepted {
+  color: #27ae60;
+  font-weight: bold;
+  padding: 4px 12px;
+  background: #d5f4e6;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.status-rejected {
+  color: #c0392b;
+  font-weight: bold;
+  padding: 4px 12px;
+  background: #fadbd8;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2ecc71;
+}
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.transaction-date {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.transaction-note {
+  color: #888;
+  font-style: italic;
+}
+.total-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+}
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #667eea;
+}
+.repayment-card {
+  background: #f0f8ff;
+  border-left: 4px solid #2ecc71;
+}
+.repayment-amount {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2ecc71;
+}
+.repayment-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+.approve-btn {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  flex: 1;
+}
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+.status-active {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-pending_approval {
+  background: #cce5ff;
+  color: #004085;
+}
+.status-repaid {
+  background: #d4edda;
+  color: #155724;
+}
+.repaid-card {
+  opacity: 0.7;
+  background: #f8f9fa;
+}
+.repayment-date {
+  color: #28a745;
+  font-weight: 600;
+  margin-top: 8px;
+}
