@@ -3,7 +3,6 @@ dist/
 .angular/
 .angular-cache/
 /.cache/
-environment.ts
 .env
 frontend/.env
 .DS_Store
